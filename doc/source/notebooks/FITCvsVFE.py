@@ -1,4 +1,5 @@
-import GPflow
+from __future__ import print_function
+import gpflow
 import tensorflow as tf
 import os
 import numpy as np
@@ -58,10 +59,10 @@ def getLogPredictiveDensities( targetValues, means, variances ):
     return mahalanobisTerms + normalizationTerms
     
 def getKernel():
-    return GPflow.kernels.RBF(1)
+    return gpflow.kernels.RBF(1)
 
 def getRegressionModel(X,Y):
-    m = GPflow.gpr.GPR(X, Y, kern=getKernel() )
+    m = gpflow.gpr.GPR(X, Y, kern=getKernel() )
     m.likelihood.variance = 1.
     m.kern.lengthscales = 1.
     m.kern.variance = 1.
@@ -69,15 +70,15 @@ def getRegressionModel(X,Y):
     
 def getSparseModel(X,Y,isFITC=False):
     if not(isFITC):
-        m = GPflow.sgpr.SGPR(X, Y, kern=getKernel(),  Z=X.copy() )
+        m = gpflow.sgpr.SGPR(X, Y, kern=getKernel(),  Z=X.copy() )
     else:
-        m = GPflow.sgpr.GPRFITC(X, Y, kern=getKernel(),  Z=X.copy() )
+        m = gpflow.sgpr.GPRFITC(X, Y, kern=getKernel(),  Z=X.copy() )
     return m
 
 def printModelParameters( model ):
-    print "Likelihood variance ", model.likelihood.variance, "\n"
-    print "Kernel variance ", model.kern.variance, "\n"
-    print "Kernel lengthscale ", model.kern.lengthscales, "\n"
+    print("Likelihood variance ", model.likelihood.variance, "\n")
+    print("Kernel variance ", model.kern.variance, "\n")
+    print("Kernel lengthscale ", model.kern.lengthscales, "\n")
 
 def plotPredictions( ax, model, color, label ):
     xtest = np.sort( readCsvFile( 'data/snelson_test_inputs' ) )
@@ -162,11 +163,11 @@ def snelsonDemo():
     VFEmodel, VFEcb = trainSparseModel(xtrain,ytrain,exact_model,False,xtest,ytest)
     FITCmodel, FITCcb = trainSparseModel(xtrain,ytrain,exact_model,True,xtest,ytest)
 
-    print "Exact model parameters \n"
+    print("Exact model parameters \n")
     printModelParameters( exact_model )
-    print "Sparse model parameters for VFE optimization \n"
+    print("Sparse model parameters for VFE optimization \n")
     printModelParameters( VFEmodel )
-    print "Sparse model parameters for FITC optimization \n"
+    print("Sparse model parameters for FITC optimization \n")
     printModelParameters( FITCmodel )
     
     VFEiters = FITCcb.n_iters

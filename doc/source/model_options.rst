@@ -1,40 +1,57 @@
 
 ========================
-The six models of GPflow
+The six core models of GPflow
 ========================
+
+The following table summarizes the six core model options in GPflow. 
+
++----------------------+--------------------------+----------------------------+-----------------------------+
+|                      | Gaussian                 | Non-Gaussian (variational) | Non-Gaussian                |
+|                      | Likelihood               |                            | (MCMC)                      |
++======================+==========================+============================+=============================+
+| Full-covariance      | :class:`gpflow.gpr.GPR`  | :class:`gpflow.vgp.VGP`    | :class:`gpflow.gpmc.GPMC`   |
++----------------------+--------------------------+----------------------------+-----------------------------+
+| Sparse approximation | :class:`gpflow.sgpr.SGPR`| :class:`gpflow.svgp.SVGP`  | :class:`gpflow.sgpmc.SGPMC` |
++----------------------+--------------------------+----------------------------+-----------------------------+
+
+The GPLVM, which add latent variables is also included (`notebook <notebooks/GPLVM.html>`_).
 
 GP Regression
 -------------
 
-.. automodule:: GPflow.gpr
-.. autoclass:: GPflow.gpr.GPR
+.. automodule:: gpflow.gpr
+.. autoclass:: gpflow.gpr.GPR
 
 Sparse GP Regression
 --------------------
 
-.. automodule:: GPflow.sgpr
-.. autoclass:: GPflow.sgpr.SGPR
+See also the documentation of the `derivation  <notebooks/SGPR_notes.html>`_.
+
+.. automodule:: gpflow.sgpr
+.. autoclass:: gpflow.sgpr.SGPR
 
 Variational Gaussian Approximation
 ----------------------------------
 
-.. automodule:: GPflow.vgp
-.. autoclass:: GPflow.vgp.VGP
+See also the documentation of the `derivation  <notebooks/VGP_notes.html>`_.
+
+.. automodule:: gpflow.vgp
+.. autoclass:: gpflow.vgp.VGP
 
 Sparse Variational Gaussian Approximation
 -----------------------------------------
 
-.. automodule:: GPflow.svgp
-.. autoclass:: GPflow.svgp.SVGP
+.. automodule:: gpflow.svgp
+.. autoclass:: gpflow.svgp.SVGP
 
 Markov Chain Monte Carlo
 ------------------------
 
-.. automodule:: GPflow.gpmc
-.. autoclass:: GPflow.gpmc.GPMC
+.. automodule:: gpflow.gpmc
+.. autoclass:: gpflow.gpmc.GPMC
 
 Sparse Markov Chain Monte Carlo
 -------------------------------
 
-.. automodule:: GPflow.sgpmc
-.. autoclass:: GPflow.sgpmc.SGPMC
+.. automodule:: gpflow.sgpmc
+.. autoclass:: gpflow.sgpmc.SGPMC
